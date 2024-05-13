@@ -291,6 +291,43 @@ router.post("/questions", user.tokenValidation, question.insertQuestions);
      *        description: Server Error
      */
 router.get("/questions", user.tokenValidation, question.getQuestions);
+
+/**
+     * @openapi
+     * '/bulk-questions':
+     *  post:
+     *     tags:
+     *     - Question Controller
+     *     summary: Save bulk question with category
+     *     parameters: 
+     *          - name: AUTH-TOKEN
+     *            in: header
+     *            description: Authentication JWT token
+     *            required: true
+     *            schema:
+     *               type: string
+     *     requestBody:
+     *      required: true
+     *      content:
+     *        multipart/form-data:
+     *             schema:
+     *                type: object
+     *                required:
+     *                    - qus_csv_file
+     *                properties:    
+     *                  qus_csv_file:
+     *                      type: file
+     *                
+     *     responses:
+     *      201:
+     *        description: Created
+     *      409:
+     *        description: Conflict
+     *      404:
+     *        description: Not Found
+     *      500:
+     *        description: Server Error
+     */
 router.post("/bulk-questions", user.tokenValidation, uploadCSV, question.bulkQuestions);
 
 module.exports = { router }

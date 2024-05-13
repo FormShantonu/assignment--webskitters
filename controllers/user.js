@@ -36,6 +36,7 @@ async function login(req, res) {
                         } else {
                                 logger.info("Invalid user name and password")
                                 response_body.status = 401
+                                response_body.success = false
                         }
 
                 } else {
